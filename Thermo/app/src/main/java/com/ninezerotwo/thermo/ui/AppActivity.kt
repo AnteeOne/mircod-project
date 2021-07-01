@@ -1,7 +1,8 @@
-package com.ninezerotwo.thermo
+package com.ninezerotwo.thermo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ninezerotwo.thermo.R
 
 class AppActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
