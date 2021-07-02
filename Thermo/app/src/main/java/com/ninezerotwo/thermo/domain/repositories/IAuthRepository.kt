@@ -4,7 +4,7 @@ import com.ninezerotwo.thermo.domain.models.User
 
 interface IAuthRepository {
 
-    suspend fun signIn(): String
+    suspend fun signIn(user: User): String
 
     suspend fun signUp(user: User): User
 
