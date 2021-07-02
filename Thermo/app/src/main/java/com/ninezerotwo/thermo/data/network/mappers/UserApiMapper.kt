@@ -1,8 +1,9 @@
 package com.ninezerotwo.thermo.data.network.mappers
 
-import com.ninezerotwo.thermo.data.network.dto.UserResponseDto
+import com.ninezerotwo.thermo.data.network.dto.UserSignInResponse
 import com.ninezerotwo.thermo.data.network.dto.UserSignInDto
 import com.ninezerotwo.thermo.data.network.dto.UserSignUpDto
+import com.ninezerotwo.thermo.data.network.dto.UserSignUpResponse
 import com.ninezerotwo.thermo.domain.models.User
 
 object UserApiMapper {
@@ -20,10 +21,18 @@ object UserApiMapper {
         username = user.username
     )
 
-    fun toUser(userResponseDto: UserResponseDto) = User(
-        username = userResponseDto.data.username,
-        email = userResponseDto.data.email,
-        firstName = userResponseDto.data.firstName,
-        lastName = userResponseDto.data.lastName,
+    fun toUser(userSignInResponse: UserSignInResponse) = User(
+        username = userSignInResponse.data.username,
+        email = userSignInResponse.data.email,
+        firstName = userSignInResponse.data.firstName,
+        lastName = userSignInResponse.data.lastName,
+    )
+
+    fun toUser(userSignUpResponse: UserSignUpResponse) = User(
+        username = userSignUpResponse.username,
+        email = userSignUpResponse.email,
+        firstName = userSignUpResponse.firstName,
+        lastName = userSignUpResponse.lastName,
+
     )
 }

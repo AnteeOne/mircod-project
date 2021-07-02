@@ -2,7 +2,7 @@ package com.ninezerotwo.thermo.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponseDto(
+data class UserSignInResponse(
     @SerializedName("data")
     val data: Data,
     @SerializedName("token")
