@@ -1,5 +1,6 @@
 package com.ninezerotwo.thermo.domain.usecases.auth
 
+import android.util.Log
 import com.ninezerotwo.thermo.domain.models.User
 import com.ninezerotwo.thermo.domain.repositories.IAuthRepository
 import com.ninezerotwo.thermo.domain.usecases.base.Usecase
@@ -15,6 +16,7 @@ class SignInUsecase @Inject constructor(
             val userToken = authRepository.signIn(params)
             Outcome.Success(userToken)
         } catch (ex: Exception){
+            Log.e("apptag",ex.toString())
             Outcome.Failure(ex)
         }
     }
