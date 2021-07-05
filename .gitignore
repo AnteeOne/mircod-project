@@ -121,3 +121,4 @@ Thermo/app/proguard-rules.pro
 Thermo/.idea/misc.xml
 Thermo/.idea/compiler.xml
 Thermo/.idea/runConfigurations.xml
+Thermo/.idea/ktlint.xml
