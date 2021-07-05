@@ -6,6 +6,7 @@ import com.ninezerotwo.thermo.domain.models.User
 import com.ninezerotwo.thermo.domain.repositories.IAuthRepository
 import javax.inject.Inject
 
+
 class AuthRepository @Inject constructor(
     private val authApi: AuthApi
 ) : IAuthRepository {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_height">60dp</dimen>
+    <dimen name="btn_width">160dp</dimen>
+    <dimen name="btn_marginBottom">24dp</dimen>
+    <dimen name="btn_marginStart">16dp</dimen>
+    <dimen name="btn_marginEnd">16dp</dimen>
+    <dimen name="iv_titleMarginStart">16dp</dimen>
+    <dimen name="iv_titleMarginTop">20dp</dimen>
+    <dimen name="iv_title_height">20dp</dimen>
+    <dimen name="iv_title_width">20dp</dimen>
+    <dimen name="titleMarginTop">12dp</dimen>
+    <dimen name="btn_loginWidth">340dp</dimen>
+
+    <dimen name="tv_sizeText">60sp</dimen>
+    <dimen name="tv_sizeAuthText">40sp</dimen>
+</resources>
