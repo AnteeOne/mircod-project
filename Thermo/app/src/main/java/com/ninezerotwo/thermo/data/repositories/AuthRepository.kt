@@ -25,8 +25,9 @@ class AuthRepository @Inject constructor(
     }
 
     override suspend fun signOut() {
-        TODO("Not yet implemented")
+        return authApi.signOut(mockUserToken)
     }
 
+    private val mockUserToken = "sdf" //TODO: INTEGRATE USER TOKEN LOGIC
     //TODO:Rewrite with exceptions
 }
