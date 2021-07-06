@@ -32,10 +32,10 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="@dimen/btn_width"
+        android:layout_width="@dimen/btn_TitleWidth"
         android:layout_height="@dimen/btn_height"
-        android:layout_marginStart="@dimen/btn_marginStart"
-        android:layout_marginBottom="@dimen/btn_marginBottom"
+        android:layout_marginStart="@dimen/btn_marginStartTitle"
+        android:layout_marginBottom="@dimen/btn_marginBottomTitle"
         android:text="@string/text_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,10 +43,10 @@
 
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="@dimen/btn_width"
+        android:layout_width="@dimen/btn_TitleWidth"
         android:layout_height="@dimen/btn_height"
-        android:layout_marginEnd="@dimen/btn_marginStart"
-        android:layout_marginBottom="@dimen/btn_marginBottom"
+        android:layout_marginEnd="@dimen/btn_marginStartTitle"
+        android:layout_marginBottom="@dimen/btn_marginBottomTitle"
         android:text="@string/text_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
