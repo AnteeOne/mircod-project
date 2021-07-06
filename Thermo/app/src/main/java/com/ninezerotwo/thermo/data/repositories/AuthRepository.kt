@@ -29,6 +29,6 @@ class AuthRepository @Inject constructor(
         return authApi.signOut(mockUserToken)
     }
 
-    private val mockUserToken = "sdf" //TODO: INTEGRATE USER TOKEN LOGIC
+    private val mockUserToken = "MOCK_TOKEN" //TODO: INTEGRATE USER TOKEN LOGIC
     //TODO:Rewrite with exceptions
 }
