@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.fragments.RegisterFragment">
+
+    <EditText
+        android:id="@+id/et_personEmailRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_registerText" />
+
+    <ImageView
+        android:id="@+id/iv_titleBackRegister"
+        android:layout_width="@dimen/iv_title_width"
+        android:layout_height="@dimen/iv_title_height"
+        android:layout_marginTop="@dimen/iv_titleMarginTop"
+        android:layout_marginStart="@dimen/iv_titleMarginStart"
+        android:background="@drawable/ic_title_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_registerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        android:text="@string/text_register"
+        android:textSize="@dimen/tv_sizeHeaderText"
+        android:layout_marginStart="@dimen/iv_titleMarginStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_titleBackRegister"/>
+
+    <EditText
+        android:id="@+id/et_personNameRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        android:ems="10"
+        android:hint="@string/et_personName"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_personEmailRegister" />
+
+    <EditText
+        android:id="@+id/et_passwordRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/tv_password"
+        android:ems="10"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_personNameRegister"/>
+
+    <EditText
+        android:id="@+id/et_firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/first_name"
+        android:ems="10"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_passwordRegister"/>
+
+    <EditText
+        android:id="@+id/et_lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/last_name"
+        android:ems="10"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_firstName"/>
+
+    <Button
+        android:id="@+id/btn_registerPerson"
+        android:layout_width="@dimen/btn_loginWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopTitle"
+        android:text="@string/text_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_lastName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

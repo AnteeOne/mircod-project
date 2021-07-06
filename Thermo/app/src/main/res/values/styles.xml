@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="buttonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">#F4573C</item>
+        <item name="cornerRadius">35dp</item>
+        <item name="fontFamily">@font/abel_regular</item>
+    </style>
+
+    <style name="titleDesign">
+        <item name="android:layout_marginTop">@dimen/marginTopTitle</item>
+        <item name="android:ems">10</item>
+    </style>
+</resources>

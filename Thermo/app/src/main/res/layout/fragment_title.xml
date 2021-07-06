@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.fragments.TitleFragment">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:fontFamily="@font/zen_tokyo"
+        android:text="@string/app_name"
+        android:textSize="@dimen/tv_sizeText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.240" />
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@drawable/ic_title"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="@dimen/btn_TitleWidth"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/btn_marginStartTitle"
+        android:layout_marginBottom="@dimen/btn_marginBottomTitle"
+        android:text="@string/text_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteY="647dp" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="@dimen/btn_TitleWidth"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginEnd="@dimen/btn_marginStartTitle"
+        android:layout_marginBottom="@dimen/btn_marginBottomTitle"
+        android:text="@string/text_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_login" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

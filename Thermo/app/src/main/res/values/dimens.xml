@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Auth. -->
+    <dimen name="btn_height">60dp</dimen>
+    <dimen name="btn_TitleWidth">160dp</dimen>
+    <dimen name="btn_marginBottomTitle">24dp</dimen>
+    <dimen name="btn_marginStartTitle">16dp</dimen>
+    <dimen name="btn_marginEndTitle">16dp</dimen>
+    <dimen name="iv_titleMarginStart">16dp</dimen>
+    <dimen name="iv_titleMarginTop">20dp</dimen>
+    <dimen name="iv_title_height">20dp</dimen>
+    <dimen name="iv_title_width">20dp</dimen>
+    <dimen name="marginTopTitle">12dp</dimen>
+
+    <!-- Home. -->
+    <dimen name="btn_loginWidth">340dp</dimen>
+    <dimen name="defaultMargin">20dp</dimen>
+    <dimen name="middleSquare">240dp</dimen>
+    <dimen name="bigSquare">300dp</dimen>
+    <dimen name="iv_bluetoothWidth">20dp</dimen>
+    <dimen name="iv_bluetoothHeight">20dp</dimen>
+    <dimen name="iv_bluetoothMarginTop">16dp</dimen>
+
+    <!-- Text. -->
+    <dimen name="tv_sizeText">60sp</dimen>
+    <dimen name="tv_sizeHeaderText">40sp</dimen>
+    <dimen name="cv_cardCornerRadius">35dp</dimen>
+    <dimen name="graphMargin">30dp</dimen>
+
+</resources>
