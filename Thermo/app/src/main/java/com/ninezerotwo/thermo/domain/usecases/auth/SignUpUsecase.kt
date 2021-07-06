@@ -8,7 +8,7 @@ import com.ninezerotwo.thermo.domain.utils.Outcome
 import javax.inject.Inject
 
 class SignUpUsecase @Inject constructor(
-    val authRepository: IAuthRepository
+    private val authRepository: IAuthRepository
 ) : Usecase<User, User>() {
 
     override suspend fun run(params: User): Outcome<User> {
