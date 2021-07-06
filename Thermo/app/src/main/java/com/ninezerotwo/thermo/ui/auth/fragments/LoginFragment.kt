@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentLoginBinding
 import com.ninezerotwo.thermo.domain.models.User
 import com.ninezerotwo.thermo.ui.auth.viewmodels.SignInViewModel
@@ -59,6 +61,7 @@ class LoginFragment : Fragment() {
                         "Sign is as ${it.userToken}",
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
                 is SignInViewModel.SignInState.Failed -> {
                     Snackbar.make(
