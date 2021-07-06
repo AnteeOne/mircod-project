@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentTitleBinding
 import com.ninezerotwo.thermo.ui.auth.viewmodels.TitleViewModel
@@ -21,10 +20,6 @@ class TitleFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val titleViewModel: TitleViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +51,7 @@ class TitleFragment : Fragment() {
             Log.d("apptag", "Token observers init...")
             when (it) {
                 TitleViewModel.TokenState.Authenticated -> {
-                    Snackbar.make(
-                        binding.root,
-                        "Signed in by token!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    findNavController().navigate(R.id.action_titleFragment_to_homeFragment)
                 }
                 TitleViewModel.TokenState.Empty -> {
                 }
