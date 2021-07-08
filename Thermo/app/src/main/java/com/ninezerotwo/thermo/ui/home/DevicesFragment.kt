@@ -46,6 +46,7 @@ class DevicesFragment : Fragment() {
     private fun initRecycler() {
         devicesAdapter = DevicesAdapter {
             devicesViewModel.connectToDevice(it)
+            binding.pbDevices.isClickable = false
             binding.pbDevices.visibility = View.VISIBLE
         }
         binding.rvDeviceDtoList.adapter = devicesAdapter
@@ -68,22 +69,24 @@ class DevicesFragment : Fragment() {
                 }
             }
         }
-        devicesViewModel.deviceConnectStateLiveData.observe(viewLifecycleOwner){
+        devicesViewModel.deviceConnectStateLiveData.observe(viewLifecycleOwner) {
             binding.pbDevices.visibility = View.GONE
-            when(it){
-                DevicesViewModel.ConnectToDeviceState.Empty -> {}
+            binding.pbDevices.isClickable = true
+            when (it) {
+                DevicesViewModel.ConnectToDeviceState.Empty -> {
+                }
                 DevicesViewModel.ConnectToDeviceState.Failure -> {
-                    Snackbar.make(binding.root,"Failure to connect!",Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Failure to connect!", Snackbar.LENGTH_SHORT).show()
                 }
                 DevicesViewModel.ConnectToDeviceState.Success -> {
-                    Snackbar.make(binding.root,"Success connected!",Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Success connected!", Snackbar.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
             }
         }
     }
 
-    private fun scanDevices(){
+    private fun scanDevices() {
         devicesViewModel.scanDevices()
     }
 
