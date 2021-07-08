@@ -4,13 +4,13 @@ import android.content.Context
 import com.clj.fastble.BleManager
 import com.ninezerotwo.thermo.data.network.AuthApi
 import com.ninezerotwo.thermo.data.repositories.AuthRepository
-import com.ninezerotwo.thermo.data.repositories.TokenRepository
+import com.ninezerotwo.thermo.data.repositories.SharedPreferencesRepository
 import com.ninezerotwo.thermo.device.repositories.DevicesRepository
 import com.ninezerotwo.thermo.device.repositories.ThermoRepository
 import com.ninezerotwo.thermo.domain.repositories.IAuthRepository
 import com.ninezerotwo.thermo.domain.repositories.IDevicesRepository
 import com.ninezerotwo.thermo.domain.repositories.IThermoRepository
-import com.ninezerotwo.thermo.domain.repositories.ITokenRepository
+import com.ninezerotwo.thermo.domain.repositories.ISharedPreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,8 +29,8 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideTokenRepository(@ApplicationContext context: Context): ITokenRepository =
-        TokenRepository(context)
+    fun provideTokenRepository(@ApplicationContext context: Context): ISharedPreferencesRepository =
+        SharedPreferencesRepository(context)
 
     @Singleton
     @Provides
