@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentHomeBinding
 import com.ninezerotwo.thermo.ui.home.viewmodels.DevicesViewModel
+import com.ninezerotwo.thermo.ui.home.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initObservers(){
-
+        homeViewModel.synchroniseDevice()
     }
 
 

@@ -14,6 +14,7 @@
         android:layout_margin="@dimen/marginTopTitle"
         android:text="@string/case_name_home"
         android:textSize="@dimen/tv_sizeHeaderText"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

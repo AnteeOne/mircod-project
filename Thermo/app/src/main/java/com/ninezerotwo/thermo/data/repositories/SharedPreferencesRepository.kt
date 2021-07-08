@@ -30,7 +30,7 @@ class SharedPreferencesRepository @Inject constructor(
 
     override fun getMac(): String {
         val token: String? = sharedPreferences?.getString(MAC_KEY, null)
-        return token ?: DEFAULT_TOKEN
+        return token ?: DEFAULT_MAC
     }
 
     override fun saveMac(mac: String) {
