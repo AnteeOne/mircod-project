@@ -1,4 +1,4 @@
-package com.ninezerotwo.thermo.ui.home
+package com.ninezerotwo.thermo.ui.home.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +14,26 @@ import com.google.android.material.snackbar.Snackbar
 import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentDevicesBinding
 import com.ninezerotwo.thermo.databinding.FragmentHomeBinding
+import com.ninezerotwo.thermo.devices.bluetooth.BluetoothConnect
+import com.ninezerotwo.thermo.domain.connections.ThermometerConnection
 import com.ninezerotwo.thermo.ui.home.entity.DeviceDto
 import com.ninezerotwo.thermo.ui.home.recyclerview.DeviceDtoAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class DevicesFragment : Fragment() {
 
     private var _binding: FragmentDevicesBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var scope: CoroutineScope
+
+    private lateinit var testList: MutableList<DeviceDto>
+
+    @Inject
+    lateinit var testBluetooth: ThermometerConnection
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +46,19 @@ class DevicesFragment : Fragment() {
         _binding = FragmentDevicesBinding.inflate(inflater, container, false)
         initListeners()
         initRecycler()
+        scope.launch {
+            testList = testBluetooth.searchDevices()
+            var adapter = DeviceDtoAdapter {
+                Snackbar.make(
+                    binding.root,
+                    "${it.mac}",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+            Log.d("rv", testList.toString())
+            adapter.submitList(testList)
+        }
+
         return binding.root
     }
 
