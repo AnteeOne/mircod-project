@@ -15,14 +15,20 @@ import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentDevicesBinding
 import com.ninezerotwo.thermo.databinding.FragmentHomeBinding
 import com.ninezerotwo.thermo.devices.bluetooth.BluetoothConnect
+import com.ninezerotwo.thermo.devices.bluetooth.callbacks.NotifyTempCallback
 import com.ninezerotwo.thermo.domain.connections.ThermometerConnection
 import com.ninezerotwo.thermo.ui.home.entity.DeviceDto
 import com.ninezerotwo.thermo.ui.home.recyclerview.DeviceDtoAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DevicesFragment : Fragment() {
+
+@AndroidEntryPoint
+class DevicesFragment : Fragment(), NotifyTempCallback {
 
     private var _binding: FragmentDevicesBinding? = null
     private val binding get() = _binding!!
@@ -39,6 +45,26 @@ class DevicesFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    override suspend fun getDevices(list: MutableList<DeviceDto>) {
+        var adapter = DeviceDtoAdapter {
+            Snackbar.make(
+                binding.root,
+                "${it.mac}",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+        adapter.submitList(testBluetooth.searchDevices())
+        binding.rvDeviceDtoList.adapter = adapter
+    }
+
+    override suspend fun getMacDevices(): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun setTempDevice(temp: Int) {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,18 +72,22 @@ class DevicesFragment : Fragment() {
         _binding = FragmentDevicesBinding.inflate(inflater, container, false)
         initListeners()
         initRecycler()
-        scope.launch {
-            testList = testBluetooth.searchDevices()
-            var adapter = DeviceDtoAdapter {
-                Snackbar.make(
-                    binding.root,
-                    "${it.mac}",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
-            Log.d("rv", testList.toString())
-            adapter.submitList(testList)
+        var adapter = DeviceDtoAdapter {
+            Snackbar.make(
+                binding.root,
+                "${it.mac}",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
+        scope.launch {
+            adapter.currentList.toString()
+            adapter.submitList(testBluetooth.searchDevices())
+            Log.d("rv", adapter.currentList.toString())
+            //binding.rvDeviceDtoList.adapter = adapter
+            //adapter.submitList(testList)
+            //binding.rvDeviceDtoList.adapter = adapter
+        }
+
 
         return binding.root
     }
@@ -70,7 +100,7 @@ class DevicesFragment : Fragment() {
 
     private fun initRecycler(){
         //test rv
-        binding.rvDeviceDtoList.adapter = testRvAdapter()
+        //binding.rvDeviceDtoList.adapter = testRvAdapter()
         // TODO: 08.07.2021 add adapter in rv from bluetooth
         binding.rvDeviceDtoList.addItemDecoration(
             DividerItemDecoration(

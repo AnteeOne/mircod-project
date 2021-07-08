@@ -17,13 +17,14 @@ import com.ninezerotwo.thermo.domain.connections.ThermometerConnection
 import com.ninezerotwo.thermo.ui.home.entity.DeviceDto
 import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class BluetoothConnect @Inject constructor(
     private val manager: BleManager,
     //private val notifyTempCallback: NotifyTempCallback,
-    private val bluetoothScope: CoroutineScope
+    private val bluetoothScope: CoroutineScope,
 ): ThermometerConnection {
-    private lateinit var devices: MutableList<DeviceDto>
+    private var devices: MutableList<DeviceDto> =  ArrayList()
 
     init {
         manager.also {
@@ -44,24 +45,25 @@ class BluetoothConnect @Inject constructor(
 
     override suspend fun searchDevices(): MutableList<DeviceDto> {
         manager.scan(object : BleScanCallback(){
-            override fun onScanStarted(success: Boolean) {
-                Log.d("apptag", "scan started!!!")
-            }
+               override fun onScanStarted(success: Boolean) {
+                   Log.d("apptag", "scan started!!!")
+               }
+               override fun onScanning(bleDevice: BleDevice?) {
+                   Log.d("apptag", "${bleDevice?.name} - ${bleDevice?.mac ?: ""}")
+               }
+               override fun onScanFinished(scanResultList: MutableList<BleDevice>?) {
+                   if (scanResultList != null) {
+                       Log.d("apptag", "devices: ${scanResultList?.toString() ?: ""}")
+                       for (bleDevice in scanResultList){
+                           devices.add(DeviceDto(bleDevice?.name ?: "Empty", bleDevice.mac))
+                       }
+                   }
+                   Log.d("apptag", "scan finished!!!")
+               }
+           })
+            Log.d("apptag", "${devices.toString() } @@@@@@@@@@@@@@@@@@@@@@@@@@")
+            return devices
 
-            override fun onScanning(bleDevice: BleDevice?) {
-                Log.d("apptag", "${bleDevice?.name} - ${bleDevice?.mac ?: ""}")
-            }
-
-            override fun onScanFinished(scanResultList: MutableList<BleDevice>?) {
-                if (scanResultList != null) {
-                    for (bleDevice in scanResultList){
-                        devices.add(DeviceDto(bleDevice.name, bleDevice.mac))
-                    }
-                }
-                Log.d("apptag", "scan finished!!!")
-            }
-        })
-        return devices
     }
 
     override suspend fun connectToDevice(notifyTempCallback: NotifyTempCallback){

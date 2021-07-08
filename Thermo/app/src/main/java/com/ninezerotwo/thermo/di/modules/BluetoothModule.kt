@@ -30,11 +30,12 @@ class BluetoothModule {
 
     @Singleton
     @Provides
-    fun provideContextBluetooth(app: Application): CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    fun provideScope(): CoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
 
     @Singleton
     @Provides
     fun provideThermometerConnection(bleManager: BleManager, scope: CoroutineScope):
             ThermometerConnection = BluetoothConnect(bleManager, scope)
+
 }
