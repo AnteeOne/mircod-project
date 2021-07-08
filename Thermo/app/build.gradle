@@ -77,4 +77,5 @@ dependencies {
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:${nav_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${nav_version}"
+    implementation "com.clj.fastble:FastBleLib:2.3.4"
 }

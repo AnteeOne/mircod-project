@@ -1,32 +1,34 @@
 package com.ninezerotwo.thermo.ui.home.recyclerview
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ninezerotwo.thermo.databinding.DeviceInfoBinding
-import com.ninezerotwo.thermo.ui.home.entity.DeviceDto
+import com.ninezerotwo.thermo.domain.models.Device
 
-class DeviceDtoAdapter(
-    private val itemClick: (DeviceDto) -> Unit
-) : ListAdapter<DeviceDto, DeviceDtoAdapter.DeviceDtoHolder>(object : DiffUtil.ItemCallback<DeviceDto>() {
-    override fun areItemsTheSame(oldItem: DeviceDto, newItem: DeviceDto): Boolean = oldItem.mac == newItem.mac
-    override fun areContentsTheSame(oldItem: DeviceDto, newItem: DeviceDto): Boolean = oldItem == newItem
+class DevicesAdapter(
+    private val itemClick: (Device) -> Unit
+) : ListAdapter<Device, DevicesAdapter.DeviceDtoHolder>(object : DiffUtil.ItemCallback<Device>() {
+    override fun areItemsTheSame(oldItem: Device, newItem: Device): Boolean =
+        oldItem.mac == newItem.mac
+
+    override fun areContentsTheSame(oldItem: Device, newItem: Device): Boolean = oldItem == newItem
 }) {
 
     inner class DeviceDtoHolder(
         private val binding: DeviceInfoBinding,
-        private val itemClick: (DeviceDto) -> Unit
-        ) : RecyclerView.ViewHolder(binding.root){
+        private val itemClick: (Device) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(deviceDto: DeviceDto){
-                binding.containerDevice.setOnClickListener {
-                    itemClick.invoke(deviceDto)
-                }
-                binding.tvDeviceInfo.text = deviceDto.name
+        fun bind(device: Device) {
+            binding.containerDevice.setOnClickListener {
+                itemClick.invoke(device)
             }
+            binding.tvNameDevice.text = device.mac
+            binding.tvDeviceInfo.text = device.name
+        }
 
     }
 
