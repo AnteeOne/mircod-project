@@ -10,4 +10,8 @@
     <string name="last_name">last name</string>
     <string name="case_name_home">Home</string>
     <string name="email">Email</string>
+    <string name="case_devices_name">Device list</string>
+    <string name="case_addDevice">Add device</string>
+    <string name="measure">Celsius</string>
+    <string name="testTemp">44.4</string>
 </resources>
