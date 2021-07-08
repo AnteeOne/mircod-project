@@ -34,7 +34,6 @@
         android:id="@+id/et_addDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/et_addDevicesMarginTop"
         android:text="@string/case_addDevice"
         android:textSize="@dimen/tv_normalSizeText"
@@ -50,6 +49,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/middleSquare"
         android:layout_height="@dimen/middleSquare"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cv_temp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
