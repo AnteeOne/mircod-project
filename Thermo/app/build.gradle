@@ -14,6 +14,8 @@ ext {
     retrofit_version = '2.9.0'
     mpandroidchart_version='3.1.0'
     nav_version = '2.3.5'
+    lifecycle_version = '2.3.0'
+    arch_version = "2.1.0"
 }
 
 android {
@@ -78,4 +80,16 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:${nav_version}"
     implementation "androidx.navigation:navigation-ui-ktx:${nav_version}"
     implementation "com.clj.fastble:FastBleLib:2.3.4"
+
+    // lifecycle
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+    // Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 }
