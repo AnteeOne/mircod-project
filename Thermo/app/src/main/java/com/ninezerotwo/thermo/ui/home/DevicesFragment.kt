@@ -2,29 +2,29 @@ package com.ninezerotwo.thermo.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentDevicesBinding
-import com.ninezerotwo.thermo.databinding.FragmentHomeBinding
-import com.ninezerotwo.thermo.ui.home.entity.DeviceDto
-import com.ninezerotwo.thermo.ui.home.recyclerview.DeviceDtoAdapter
+import com.ninezerotwo.thermo.ui.home.recyclerview.DevicesAdapter
+import com.ninezerotwo.thermo.ui.home.viewmodels.DevicesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DevicesFragment : Fragment() {
 
     private var _binding: FragmentDevicesBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val devicesViewModel: DevicesViewModel by viewModels()
+
+    private lateinit var devicesAdapter: DevicesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,44 +33,61 @@ class DevicesFragment : Fragment() {
         _binding = FragmentDevicesBinding.inflate(inflater, container, false)
         initListeners()
         initRecycler()
+        initObservers()
         return binding.root
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         binding.ivDevicesBack.setOnClickListener {
             findNavController().navigate(R.id.action_devicesFragment_to_homeFragment)
         }
     }
 
-    private fun initRecycler(){
-        //test rv
-        binding.rvDeviceDtoList.adapter = testRvAdapter()
-        // TODO: 08.07.2021 add adapter in rv from bluetooth
+    private fun initRecycler() {
+        devicesAdapter = DevicesAdapter {
+            devicesViewModel.connectToDevice(it)
+            binding.pbDevices.isClickable = false
+            binding.pbDevices.visibility = View.VISIBLE
+        }
+        binding.rvDeviceDtoList.adapter = devicesAdapter
         binding.rvDeviceDtoList.addItemDecoration(
             DividerItemDecoration(
-            activity,
-            DividerItemDecoration.VERTICAL
-        )
+                activity,
+                DividerItemDecoration.VERTICAL
+            )
         )
     }
 
-    //fun for test rv
-    private fun testRvAdapter(): DeviceDtoAdapter{
-        var deviceDto1 = DeviceDto("Azacfdvzc", "asxcdvfsbgfd")
-        var deviceDto2 = DeviceDto("Azacfdvzc", "asxcdvfsbgfd")
-        var deviceDto3 = DeviceDto("Azacfdvzc", "asxcdvfsbgfd")
-        var deviceDto4 = DeviceDto("Azacfdvzc", "asxcdvfsbgfd")
-        var adapter = DeviceDtoAdapter {
-            Snackbar.make(
-                binding.root,
-                "${it.mac}",
-                Snackbar.LENGTH_SHORT
-            ).show()
+    private fun initObservers() {
+        devicesViewModel.devicesStateLiveData.observe(viewLifecycleOwner) {
+            binding.pbDevices.visibility = View.GONE
+            when (it) {
+                DevicesViewModel.NearbyDevicesState.Empty -> Log.d("apptag", "bl:empty")
+                DevicesViewModel.NearbyDevicesState.Failure -> Log.d("apptag", "bl:failure")
+                is DevicesViewModel.NearbyDevicesState.Success -> {
+                    devicesAdapter.submitList(it.devices)
+                }
+            }
         }
-        var testList = listOf(deviceDto1, deviceDto2, deviceDto3, deviceDto4)
-        Log.d("rv", testList.toString())
-        adapter.submitList(testList)
-        return adapter
+        devicesViewModel.deviceConnectStateLiveData.observe(viewLifecycleOwner) {
+            binding.pbDevices.visibility = View.GONE
+            binding.pbDevices.isClickable = true
+            when (it) {
+                DevicesViewModel.ConnectToDeviceState.Empty -> {
+                }
+                DevicesViewModel.ConnectToDeviceState.Failure -> {
+                    Snackbar.make(binding.root, "Failure to connect!", Snackbar.LENGTH_SHORT).show()
+                }
+                DevicesViewModel.ConnectToDeviceState.Success -> {
+                    Snackbar.make(binding.root, "Success connected!", Snackbar.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+            }
+        }
+    }
+
+    private fun scanDevices() {
+        devicesViewModel.scanDevices()
     }
 
 }
