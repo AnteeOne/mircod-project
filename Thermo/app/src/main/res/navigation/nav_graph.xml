@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ninezerotwo.thermo.ui.home.HomeFragment"
+        android:name="com.ninezerotwo.thermo.ui.home.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/devicesFragment"
-        android:name="com.ninezerotwo.thermo.ui.home.DevicesFragment"
+        android:name="com.ninezerotwo.thermo.ui.home.fragments.DevicesFragment"
         android:label="fragment_devices"
         tools:layout="@layout/fragment_devices">
         <action

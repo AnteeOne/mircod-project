@@ -51,17 +51,26 @@ class HomeViewModel @Inject constructor(
     fun synchroniseDevice(){
         synchroniseDeviceUsecase.invoke(viewModelScope,Unit){
             when(it){
-                is Outcome.Failure -> Log.d("apptag","Synchronise with device: Failure")
+                is Outcome.Failure -> {
+                    Log.d("apptag","Synchronise with device: Failure")
+                    _synchStateLiveData.value = SynchState.Failure
+                }
                 is Outcome.Success -> {
                     Log.d("apptag","Synchronise with device: Success")
                     Log.d("apptag","Battery: ${it.data.first}%")
                     _synchStateLiveData.value = SynchState.Success
                     _batteryStateLiveData.value = BatteryState.Success(it.data.first ?: 0)
-//                    viewModelScope.launch {
-//                        it.data.second?.collect{item ->
-//                            _temperatureStateLiveData.value = TemperatureState.Success(item)
-//                        }
-//                    }
+                    viewModelScope.launch {
+                        try {
+                            it.data.second?.collect{item ->
+                                _temperatureStateLiveData.postValue(TemperatureState.Success(item))
+                            }
+                        }
+                        catch (ex: Exception){
+                            ex.printStackTrace()
+                        }
+
+                    }
                 }
             }
         }

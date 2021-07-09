@@ -1,4 +1,4 @@
-package com.ninezerotwo.thermo.ui.home
+package com.ninezerotwo.thermo.ui.home.fragments
 
 import android.os.Bundle
 import android.util.Log

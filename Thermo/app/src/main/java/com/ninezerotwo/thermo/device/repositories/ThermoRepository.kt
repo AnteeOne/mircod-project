@@ -10,10 +10,10 @@ import com.clj.fastble.exception.BleException
 import com.ninezerotwo.thermo.device.bluetooth.BleConstants
 import com.ninezerotwo.thermo.device.bluetooth.ByteConverter
 import com.ninezerotwo.thermo.domain.repositories.IThermoRepository
-import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.onFailure
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -59,7 +59,7 @@ class ThermoRepository @Inject constructor(
         manager.read(savedBleDevice,
             BleConstants.BATTERY_SERVICE_UUID,
             BleConstants.BATTERY_CHAR_UUID,
-            object: BleReadCallback() {
+            object : BleReadCallback() {
 
                 override fun onReadSuccess(data: ByteArray) {
                     cor.resumeWith(Result.success(data[0].toInt()))
@@ -72,25 +72,29 @@ class ThermoRepository @Inject constructor(
             })
     }
 
+    @ExperimentalCoroutinesApi
     override fun getTemperature(): Flow<Float> = callbackFlow {
         manager.notify(savedBleDevice,
             BleConstants.TEMP_SERVICE_UUID,
             BleConstants.TEMP_CHAR_UUID,
-            object: BleNotifyCallback(){
+            object : BleNotifyCallback() {
                 override fun onNotifySuccess() {}
 
                 override fun onNotifyFailure(exception: BleException) {
-                    cancel(CancellationException("Temperature API Error"))
+                    close()
                 }
 
                 override fun onCharacteristicChanged(data: ByteArray) {
-                    trySendBlocking(ByteConverter.toTemperature(data[0],data[1])).onFailure {
-                        cancel(CancellationException("Temperature API Error"))
+                    trySend(ByteConverter.toTemperature(data[0], data[1])).onFailure {
+                        close()
                     }
                 }
 
             })
-        
+        awaitClose {
+            cancel()
+        }
+
     }
 
 

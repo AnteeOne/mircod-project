@@ -1,4 +1,4 @@
-package com.ninezerotwo.thermo.ui.home
+package com.ninezerotwo.thermo.ui.home.fragments
 
 import android.graphics.Color
 import android.os.Bundle
@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
                     is HomeViewModel.BatteryState.Failure -> {
                     }
                     is HomeViewModel.BatteryState.Success -> {
-                        changeBatterIcon(it.battery)
+                        changeBatteryIcon(it.battery)
                     }
                 }
             }
@@ -92,7 +92,12 @@ class HomeFragment : Fragment() {
                     is HomeViewModel.TemperatureState.Empty -> {}
                     is HomeViewModel.TemperatureState.Failure -> {}
                     is HomeViewModel.TemperatureState.Success -> {
-                        binding.tvThermoValue.text = it.temperature.toString()
+                        Snackbar.make(binding.root,"Update!",Snackbar.LENGTH_SHORT).apply {
+                            animationMode = Snackbar.ANIMATION_MODE_FADE
+                            show()
+                        }
+                        Log.d("apptag","Temperature Update = ${it.temperature}°С")
+                        changeTemperature(it.temperature)
                     }
                 }
             }
@@ -109,9 +114,11 @@ class HomeFragment : Fragment() {
         binding.etAddDevice.visibility = View.VISIBLE
     }
 
-    fun changeBatterIcon(value: Int) {
+
+    fun changeBatteryIcon(value: Int) {
         with(binding.ivBatteryValue) {
             when (value) {
+
                 in 1..33 -> this.setImageResource(R.drawable.ic_battery_low)
                 in 34..80 -> this.setImageResource(R.drawable.ic_battery_middle)
                 in 81..100 -> this.setImageResource(R.drawable.ic_battery_full)
@@ -165,13 +172,16 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun formatData(list: ArrayList<Temperature>): LineDataSet{
+    private fun formatData(list: ArrayList<Temperature>): LineDataSet {
         var entries = ArrayList<Entry>()
-        for (temp in list){
+        for (temp in list) {
             entries.add(Entry(temp.date, temp.value))
         }
         return LineDataSet(entries, "")
+    }
 
+    fun changeTemperature(temp: Float){
+        binding.tvThermoValue.text = temp.toString()
     }
 
 

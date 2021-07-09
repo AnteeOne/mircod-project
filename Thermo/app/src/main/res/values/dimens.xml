@@ -30,6 +30,6 @@
     <dimen name="tv_sizeHeaderText">25sp</dimen>
     <dimen name="cv_cardCornerRadius">35dp</dimen>
     <dimen name="graphMargin">30dp</dimen>
-    <dimen name="tv_normalSizeText">28sp</dimen>
+    <dimen name="tv_normalSizeText">34sp</dimen>
 
 </resources>
