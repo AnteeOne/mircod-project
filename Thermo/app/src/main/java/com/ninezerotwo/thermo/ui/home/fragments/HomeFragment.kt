@@ -1,6 +1,7 @@
-package com.ninezerotwo.thermo.ui.home
+package com.ninezerotwo.thermo.ui.home.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import com.github.mikephil.charting.charts.LineChart
 import com.google.android.material.snackbar.Snackbar
 import com.ninezerotwo.thermo.R
 import com.ninezerotwo.thermo.databinding.FragmentHomeBinding
-import com.ninezerotwo.thermo.ui.home.viewmodels.DevicesViewModel
 import com.ninezerotwo.thermo.ui.home.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                     is HomeViewModel.BatteryState.Failure -> {
                     }
                     is HomeViewModel.BatteryState.Success -> {
-                        changeBatterIcon(it.battery)
+                        changeBatteryIcon(it.battery)
                     }
                 }
             }
@@ -76,7 +76,12 @@ class HomeFragment : Fragment() {
                     is HomeViewModel.TemperatureState.Empty -> {}
                     is HomeViewModel.TemperatureState.Failure -> {}
                     is HomeViewModel.TemperatureState.Success -> {
-                        binding.tvThermoValue.text = it.temperature.toString()
+                        Snackbar.make(binding.root,"Update!",Snackbar.LENGTH_SHORT).apply {
+                            animationMode = Snackbar.ANIMATION_MODE_FADE
+                            show()
+                        }
+                        Log.d("apptag","Temperature Update = ${it.temperature}°С")
+                        changeTemperature(it.temperature)
                     }
                 }
             }
@@ -93,7 +98,7 @@ class HomeFragment : Fragment() {
         binding.etAddDevice.visibility = View.VISIBLE
     }
 
-    fun changeBatterIcon(value: Int){
+    fun changeBatteryIcon(value: Int){
         with(binding.ivBatteryValue){
             when(value){
                 in 1..33 -> this.setImageResource(R.drawable.ic_battery_low)
@@ -102,7 +107,10 @@ class HomeFragment : Fragment() {
                 else -> this.setImageResource(R.drawable.ic_battery_empty)
             }
         }
+    }
 
+    fun changeTemperature(temp: Float){
+        binding.tvThermoValue.text = temp.toString()
     }
 
 

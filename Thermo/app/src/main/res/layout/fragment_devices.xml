@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.home.DevicesFragment">
+    tools:context=".ui.home.fragments.DevicesFragment">
 
     <ImageView
         android:id="@+id/iv_devicesBack"

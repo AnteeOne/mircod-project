@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
+    tools:context=".ui.home.fragments.HomeFragment"
     android:background="@drawable/background_gradient">
 
     <TextView
@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/et_addDevicesMarginTop"
+        android:fontFamily="@font/montserrat"
         android:text="@string/case_addDevice"
         android:textSize="@dimen/tv_normalSizeText"
         android:clickable="false"
@@ -62,6 +63,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:layout_marginTop="@dimen/tv_normalMarginTop"
             android:text="@string/measure"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,16 +71,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tv_thermoValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tv_smallMarginTop"
-            android:textSize="@dimen/tv_normalSizeText"
-            android:text="@string/testTemp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+    <TextView
+        android:id="@+id/tv_thermoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tv_smallMarginTop"
+        android:text="@string/testTemp"
+        android:textSize="@dimen/tv_normalSizeText"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <ImageView
             android:id="@+id/iv_batteryValue"
