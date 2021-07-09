@@ -99,7 +99,7 @@
             android:id="@+id/iv_circleTemp"
             android:layout_width="@dimen/middleSquare"
             android:layout_height="@dimen/middleSquare"
-            android:src="@drawable/ic_circle"
+            android:src="@drawable/ic_circle_full"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
