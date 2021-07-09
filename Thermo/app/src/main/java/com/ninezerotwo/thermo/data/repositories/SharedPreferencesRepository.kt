@@ -11,7 +11,7 @@ class SharedPreferencesRepository @Inject constructor(
 
     private val SHARED_NAME = "tokenRepository"
     private val TOKEN_KEY = "accessToken"
-    private val MAC_KEY = "accessToken"
+    private val MAC_KEY = "savedMac"
 
     private val sharedPreferences: SharedPreferences? =
         context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)

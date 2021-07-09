@@ -18,20 +18,18 @@ class SynchroniseDeviceUsecase @Inject constructor(
         try {
             val resultContainer = Container<Int,Flow<Float>>()
             val deviceMac = sharedRepository.getMac()
-            if(deviceMac == sharedRepository.DEFAULT_MAC){
-                return Outcome.Failure(IllegalStateException())
+
+            val isConnected = thermoRepository.connectToDevice(deviceMac)
+            if(isConnected){
+                resultContainer.first = thermoRepository.getBatteryLevel()
+                resultContainer.second = thermoRepository.getTemperature()
+                return Outcome.Success(resultContainer)
             }
-            else{
-                val isConnected = thermoRepository.connectToDevice(deviceMac)
-                if(isConnected){
-                    resultContainer.first = thermoRepository.getBatteryLevel()
-                    resultContainer.second = thermoRepository.getTemperature()
-                    return Outcome.Success(resultContainer)
-                }
-                return Outcome.Failure(IllegalStateException())
-            }
+            return Outcome.Failure(IllegalStateException())
+
         }
         catch (ex: Exception){
+            ex.printStackTrace()
             return Outcome.Failure(ex)
         }
     }
