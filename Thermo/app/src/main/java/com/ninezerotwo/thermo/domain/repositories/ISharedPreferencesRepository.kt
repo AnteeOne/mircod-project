@@ -6,7 +6,7 @@ interface ISharedPreferencesRepository {
         get() = "tokenRepository"
 
     val DEFAULT_MAC: String
-        get() = "defaultMac"
+        get() = "DD:10:1C:97:66:71"
 
     fun getToken(): String
 

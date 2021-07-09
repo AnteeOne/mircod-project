@@ -130,8 +130,8 @@
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lc_tempGraph"
-            android:layout_width="@dimen/middleSquare"
-            android:layout_height="@dimen/middleSquare"
+            android:layout_width="@dimen/chartSquare"
+            android:layout_height="@dimen/chartSquare"
             android:layout_margin="@dimen/graphMargin" />
 
     </androidx.cardview.widget.CardView>
