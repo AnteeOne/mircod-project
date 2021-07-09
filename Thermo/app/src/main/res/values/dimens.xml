@@ -15,7 +15,7 @@
     <!-- Home. -->
     <dimen name="btn_loginWidth">340dp</dimen>
     <dimen name="defaultMargin">20dp</dimen>
-    <dimen name="middleSquare">300dp</dimen>
+    <dimen name="middleSquare">240dp</dimen>
     <dimen name="bigSquare">360dp</dimen>
     <dimen name="iv_bluetoothWidth">20dp</dimen>
     <dimen name="iv_bluetoothHeight">20dp</dimen>
@@ -31,5 +31,6 @@
     <dimen name="cv_cardCornerRadius">35dp</dimen>
     <dimen name="graphMargin">30dp</dimen>
     <dimen name="tv_normalSizeText">34sp</dimen>
+    <dimen name="chartSquare">300dp</dimen>
 
 </resources>
